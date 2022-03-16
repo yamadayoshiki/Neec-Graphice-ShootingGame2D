@@ -17,6 +17,12 @@ public class PlayerController : MonoBehaviour
 	private CircleCollider2D m_Collider = null;
 
 	/// <summary>
+	/// 耐久値クラス
+	/// </summary>
+	private Life m_Life = null;
+	public Life Life { get { return m_Life; } }
+
+	/// <summary>
 	/// カメラ
 	/// </summary>
 	[SerializeField]
@@ -45,11 +51,13 @@ public class PlayerController : MonoBehaviour
 		//コンポーネントを取得
 		TryGetComponent(out m_Rigidbody);
 		TryGetComponent(out m_Collider);
+		TryGetComponent(out m_Life);
 		if (m_Camera == null) m_Camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 		m_Transform = this.transform;
 
 		m_Rigidbody.gravityScale = 0.0f;
 		m_Collider.isTrigger = true;
+		m_Life.DamageReaction = this.DamageReaction;
 
 		//初期化
 		Initlaize();
@@ -60,6 +68,7 @@ public class PlayerController : MonoBehaviour
 	/// </summary>
 	public void Initlaize()
 	{
+		m_Life.Initialize();
 		m_InputDirection = Vector2.zero;
 	}
 
@@ -109,5 +118,13 @@ public class PlayerController : MonoBehaviour
 
 		//座標を反映
 		m_Transform.position = nextPos;
+	}
+
+	/// <summary>
+	/// ダメージを受けた時のリアクション
+	/// </summary>
+	private void DamageReaction()
+	{
+		Debug.Log("ダメージを受けた");
 	}
 }
