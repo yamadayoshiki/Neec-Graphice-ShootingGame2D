@@ -60,7 +60,6 @@ public class PlayerController : MonoBehaviour
 		TryGetComponent(out m_Life);
 		if (m_Camera == null) m_Camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 		if (!TryGetComponent(out m_Shooter)) m_Shooter = GetComponentInChildren<Shooter>();
-
 		m_Transform = this.transform;
 
 		m_Rigidbody.gravityScale = 0.0f;
@@ -96,6 +95,8 @@ public class PlayerController : MonoBehaviour
 		{
 			m_Shooter.Initialize();
 		}
+		//€–Sˆ—
+		Dead();
 	}
 
 	/// <summary>
@@ -136,6 +137,18 @@ public class PlayerController : MonoBehaviour
 
 		//À•W‚ğ”½‰f
 		m_Transform.position = nextPos;
+	}
+
+	/// <summary>
+	/// €–Sˆ—
+	/// </summary>
+	private void Dead()
+	{
+		//€–Sƒtƒ‰ƒO‚ª—§‚Á‚Ä‚¢‚È‚¯‚ê‚Îˆ—‚µ‚È‚¢
+		if (!m_Life.IsDead) return;
+
+		//©•ª‚ğíœ
+		Destroy(gameObject);
 	}
 
 	/// <summary>
