@@ -4,17 +4,20 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CircleCollider2D))]
-public class PlayerController : MonoBehaviour
+[RequireComponent(typeof(Life))]
+public class Enemy : MonoBehaviour
 {
 	/// <summary>
 	/// リジッドボディ
 	/// </summary>
 	private Rigidbody2D m_Rigidbody = null;
+	public Rigidbody2D Rigidbody { get { return m_Rigidbody; } }
 
 	/// <summary>
 	/// コライダー
 	/// </summary>
 	private CircleCollider2D m_Collider = null;
+	public CircleCollider2D Collider { get { return m_Collider; } }
 
 	/// <summary>
 	/// 耐久値クラス
@@ -33,26 +36,38 @@ public class PlayerController : MonoBehaviour
 	/// </summary>
 	[SerializeField]
 	private Shooter m_Shooter = null;
+	public Shooter Shooter { get { return m_Shooter; } }
 
 	/// <summary>
 	/// 自分のトランスフォーム
 	/// </summary>
-	private Transform m_Transform = null;
+	protected Transform m_Transform = null;
 
 	/// <summary>
 	/// 移動速度
 	/// </summary>
 	[SerializeField]
-	private int m_MoveSpeed = 3;
+	private int m_MoveSpeed = 100;
 	public int MoveSpeed
 	{
 		get { return m_MoveSpeed; }
 		set { m_MoveSpeed = value * 100; }
 	}
 
-	private Vector3 m_InputDirection = Vector2.zero;
+	/// <summary>
+	/// ダメージ値
+	/// </summary>
+	[SerializeField]
+	private int m_DamageValue = 1;
+	public int DamageValue { get { return m_DamageValue; } }
 
-	private void Start()
+	/// <summary>
+	/// 移動方向
+	/// </summary>
+	[SerializeField]
+	protected Vector3 m_MoveDirection = -Vector2.right;
+
+	private void OnEnable()
 	{
 		//コンポーネントを取得
 		TryGetComponent(out m_Rigidbody);
@@ -74,46 +89,27 @@ public class PlayerController : MonoBehaviour
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	public void Initlaize()
+	public virtual void Initlaize()
 	{
 		m_Life.Initialize();
 		m_Shooter.Initialize();
-		m_InputDirection = Vector2.zero;
 	}
 
 	private void Update()
 	{
-		//入力更新
-		InputUpdate();
 		//移動処理
 		Move();
-		//攻撃処理
-		if (Input.GetButton("Fire1"))
-		{
-			m_Shooter.Fire(Vector2.right);
-		}
-		else
-		{
-			m_Shooter.Initialize();
-		}
-	}
-
-	/// <summary>
-	/// 入力更新
-	/// </summary>
-	private void InputUpdate()
-	{
-		//入力方向ベクトルを取得
-		m_InputDirection = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0).normalized;
+		//死亡処理
+		Dead();
 	}
 
 	/// <summary>
 	/// 移動処理
 	/// </summary>
-	private void Move()
+	protected virtual void Move()
 	{
 		//移動量を計算
-		Vector3 velocity = m_InputDirection * m_MoveSpeed;
+		Vector3 velocity = m_MoveDirection * m_MoveSpeed;
 		//移動先の座標を保持
 		Vector3 nextPos = m_Transform.position + velocity * Time.deltaTime;
 
@@ -139,10 +135,35 @@ public class PlayerController : MonoBehaviour
 	}
 
 	/// <summary>
+	/// 死亡処理
+	/// </summary>
+	protected virtual void Dead()
+	{
+		if (!m_Life.IsDead) return;
+
+		//自分を削除
+		Destroy(gameObject);
+	}
+
+	/// <summary>
 	/// ダメージを受けた時のリアクション
 	/// </summary>
-	private void DamageReaction()
+	protected virtual void DamageReaction()
 	{
 		Debug.Log("ダメージを受けた");
+	}
+
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		if (collision.CompareTag("Player"))
+		{
+			//相手の耐久値クラスを取得してダメージを適用する
+			if (collision.gameObject.TryGetComponent(out Life life))
+			{
+				life.ApplayDamage(DamageValue);
+			}
+			//自分を削除
+			Destroy(gameObject);
+		}
 	}
 }

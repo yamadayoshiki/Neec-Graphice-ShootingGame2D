@@ -9,6 +9,7 @@ public class Life : MonoBehaviour
 	/// <summary>
 	/// 最大耐久値
 	/// </summary>
+	[SerializeField]
 	private int m_MaxHitPoint = 1;
 	public int MaxHitPoint
 	{
@@ -19,6 +20,7 @@ public class Life : MonoBehaviour
 	/// <summary>
 	/// 現在の耐久値
 	/// </summary>
+	[SerializeField]
 	private int m_HitPoint = 0;
 	public int HitPoint
 	{
@@ -79,8 +81,8 @@ public class Life : MonoBehaviour
 	/// <param name="damage"></param>
 	public void ApplayDamage(int damage)
 	{
-		//無敵状態なら処理しない
-		if (IsInvicible) return;
+		//無敵状態又は死亡しているなら処理しない
+		if (IsInvicible || IsDead) return;
 
 		//耐久値からダメージ値を引く
 		HitPoint -= damage;

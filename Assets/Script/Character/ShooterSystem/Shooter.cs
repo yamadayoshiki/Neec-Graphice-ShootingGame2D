@@ -32,10 +32,13 @@ public class Shooter : MonoBehaviour
 	/// <summary>
 	/// 射撃
 	/// </summary>
-	public void Fire()
+	public void Fire(Vector2 direction)
 	{
-		if(m_RapidTimer <= 0.0f)
+		if (m_RapidTimer <= 0.0f)
 		{	//弾を生成
+			CreateBullet(direction);
+			//初期化
+			ResetTimer();
 		}
 
 		//連射タイマーの更新
@@ -45,10 +48,21 @@ public class Shooter : MonoBehaviour
 	/// <summary>
 	/// 弾の生成
 	/// </summary>
-	private void CreateBullet()
+	private void CreateBullet(Vector2 direction)
 	{
-		var bullet = Instantiate(m_BulletPrefab, this.transform.position, Quaternion.identity);
+		var bullet = Instantiate(m_BulletPrefab, this.transform.position, Quaternion.identity).GetComponent<Bullet>();
+		bullet.DamageValue = 1;
+		bullet.MoveDirection = direction;
+		bullet.Initialize();
 
+	}
+
+	/// <summary>
+	/// 射撃タイマーの初期化
+	/// </summary>
+	private void ResetTimer()
+	{
+		m_RapidTimer = m_RapidIntarval;
 	}
 }
 
