@@ -187,8 +187,6 @@ public class Enemy : MonoBehaviour
 			{
 				life.ApplayDamage(DamageValue);
 			}
-			//©•ª‚ğíœ
-			Destroy(gameObject);
 		}
 	}
 }
