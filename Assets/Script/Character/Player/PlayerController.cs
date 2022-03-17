@@ -87,6 +87,9 @@ public class PlayerController : MonoBehaviour
 	[SerializeField]
 	private float m_FadeTime = 1.0f;
 
+	/// <summary>
+	/// 入力方向ベクトル
+	/// </summary>
 	private Vector3 m_InputDirection = Vector2.zero;
 
 	private void Start()
@@ -101,6 +104,7 @@ public class PlayerController : MonoBehaviour
 
 		m_Rigidbody.gravityScale = 0.0f;
 		m_Collider.isTrigger = true;
+		//ダメージ時と死亡時処理を登録
 		m_Life.DamageReaction = this.DamageReaction;
 		m_Life.DeadReaction = this.Dead;
 
