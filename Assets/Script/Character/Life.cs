@@ -60,6 +60,11 @@ public class Life : MonoBehaviour
 	/// </summary>
 	public UnityAction DamageReaction = null;
 
+	/// <summary>
+	/// ダメージを受けた時のリアクション
+	/// </summary>
+	public UnityAction DeadReaction = null;
+
 	private void Start()
 	{
 		//初期化
@@ -87,8 +92,10 @@ public class Life : MonoBehaviour
 		//耐久値からダメージ値を引く
 		HitPoint -= damage;
 
+		//死亡時のリアクションを行う
+		if (IsDead && DeadReaction != null) DeadReaction();
 		//ダメージを受けた時のリアクションを行う
-		if (DamageReaction != null) DamageReaction();
+		else if (DamageReaction != null) DamageReaction();
 
 		//無敵処理を行う
 		StartCoroutine(nameof(Invincible));
