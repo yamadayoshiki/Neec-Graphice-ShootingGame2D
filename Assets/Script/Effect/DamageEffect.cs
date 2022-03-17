@@ -17,7 +17,7 @@ public class DamageEffect : MonoBehaviour
 	/// </summary>
 	[SerializeField]
 	private Vector3 m_MoveDirection = Vector3.zero;
-	private Vector3 MoveDirection
+	public Vector3 MoveDirection
 	{
 		get { return m_MoveDirection; }
 		set { m_MoveDirection = value; }
@@ -29,6 +29,11 @@ public class DamageEffect : MonoBehaviour
 	[SerializeField]
 	private float m_MoveSpeed = 50.0f;
 
+	/// <summary>
+	/// スケール値
+	/// </summary>
+	[SerializeField]
+	private float m_Scale = 1.0f;
 
 
 	void Start()
@@ -40,7 +45,7 @@ public class DamageEffect : MonoBehaviour
 		var seq = DOTween.Sequence();
 
 		//拡大のアニメーション
-		seq.Append(transform.DOScale(Vector2.one * 3.0f, 0.5f));
+		seq.Append(transform.DOScale(Vector2.one * m_Scale, 0.5f));
 		//フェードアウトのアニメーション
 		seq.Insert(0.2f, m_Sprite.DOFade(0.0f, 0.5f));
 		seq.OnComplete(() => {
