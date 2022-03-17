@@ -67,7 +67,7 @@ public class Enemy : MonoBehaviour
 	[SerializeField]
 	protected Vector3 m_MoveDirection = -Vector2.right;
 
-	private void OnEnable()
+	protected virtual void OnEnable()
 	{
 		//コンポーネントを取得
 		TryGetComponent(out m_Rigidbody);
@@ -80,7 +80,9 @@ public class Enemy : MonoBehaviour
 
 		m_Rigidbody.gravityScale = 0.0f;
 		m_Collider.isTrigger = true;
+		//ダメージ時と死亡時処理を登録
 		m_Life.DamageReaction = this.DamageReaction;
+		m_Life.DeadReaction = this.Dead;
 
 		//初期化
 		Initlaize();
@@ -95,12 +97,12 @@ public class Enemy : MonoBehaviour
 		m_Shooter.Initialize();
 	}
 
-	private void Update()
+	protected virtual void Update()
 	{
 		//移動処理
 		Move();
-		//死亡処理
-		Dead();
+		//攻撃処理
+		Attack();
 	}
 
 	/// <summary>
@@ -113,25 +115,48 @@ public class Enemy : MonoBehaviour
 		//移動先の座標を保持
 		Vector3 nextPos = m_Transform.position + velocity * Time.deltaTime;
 
+		//画面外に出ないように補正
+		nextPos = ScreenClampPosition(nextPos);
+
+		//座標を反映
+		m_Transform.position = nextPos;
+	}
+
+	/// <summary>
+	/// 画面外に出ないように補正処理
+	/// </summary>
+	/// <param name="position"></param>
+	/// <returns></returns>
+	protected Vector3 ScreenClampPosition(Vector3 position)
+	{
+		//移動先の座標
+		Vector3 nextPos = position;
+
 		/**** 画面外に出ないように補正処理 ********************************************************/
 		//当たり判定の半径を取得
 		float radius = m_Collider.radius;
 		//Z軸の座標を取得
-		float positionZ = nextPos.z;
+		float positionZ = position.z;
 
 		//画面右上の座標を取得
-		Vector3 topRight = m_Camera.ViewportToWorldPoint(new Vector3(1.0f, 1.0f, positionZ));
+		Vector3 topRight = MyScreen.TopRight;
 		//画面左下の座標を取得
-		Vector3 bottomLeft = m_Camera.ViewportToWorldPoint(new Vector3(0.0f, 0.0f, positionZ));
+		Vector3 bottomLeft = MyScreen.BottomLeft;
 
-		//X軸の座標を画面内に補正する
-		nextPos.x = Mathf.Clamp(nextPos.x, bottomLeft.x + radius, topRight.x - radius);
 		//Y軸の座標を画面内に補正する
-		nextPos.y = Mathf.Clamp(nextPos.y, bottomLeft.y + radius, topRight.y - radius);
+		nextPos.y = Mathf.Clamp(position.y, bottomLeft.y + radius, topRight.y - radius);
 		/******************************************************************************************/
 
-		//座標を反映
-		m_Transform.position = nextPos;
+		//座標を返す
+		return nextPos;
+	}
+
+	/// <summary>
+	/// 攻撃処理
+	/// </summary>
+	protected virtual void Attack()
+	{
+
 	}
 
 	/// <summary>

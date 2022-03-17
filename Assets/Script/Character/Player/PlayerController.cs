@@ -94,6 +94,8 @@ public class PlayerController : MonoBehaviour
 
 	private void Start()
 	{
+		MyScreen.Initialize();
+
 		//コンポーネントを取得
 		TryGetComponent(out m_Rigidbody);
 		TryGetComponent(out m_Collider);
@@ -164,13 +166,11 @@ public class PlayerController : MonoBehaviour
 		/**** 画面外に出ないように補正処理 ********************************************************/
 		//当たり判定の半径を取得
 		float radius = m_Collider.radius;
-		//Z軸の座標を取得
-		float positionZ = nextPos.z;
 
 		//画面右上の座標を取得
-		Vector3 topRight = m_Camera.ViewportToWorldPoint(new Vector3(1.0f, 1.0f, positionZ));
+		Vector3 topRight = MyScreen.TopRight;
 		//画面左下の座標を取得
-		Vector3 bottomLeft = m_Camera.ViewportToWorldPoint(new Vector3(0.0f, 0.0f, positionZ));
+		Vector3 bottomLeft = MyScreen.BottomLeft;
 
 		//X軸の座標を画面内に補正する
 		nextPos.x = Mathf.Clamp(nextPos.x, bottomLeft.x + radius, topRight.x - radius);
