@@ -110,6 +110,16 @@ public class PlayerController : MonoBehaviour
 		m_Life.DamageReaction = this.DamageReaction;
 		m_Life.DeadReaction = this.Dead;
 
+		//耐久値ゲージに自分の耐久値クラスを渡す
+		var uiObj = GameObject.Find("PlayerGauge");
+		if(uiObj != null)
+		{
+			if(uiObj.TryGetComponent(out LifeGauge lifeGauge))
+			{
+				lifeGauge.Life = m_Life;
+			}
+		}
+
 		//初期化
 		Initlaize();
 	}

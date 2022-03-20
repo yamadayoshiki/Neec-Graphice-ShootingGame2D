@@ -85,6 +85,17 @@ public class BossEnemy : Enemy
 		if (dirY < 0) m_MoveDirection.y = dirY;
 		else m_MoveDirection.y = 1.0f;
 
+		//耐久値ゲージに自分の耐久値クラスを渡す
+		var uiObj = GameObject.Find("BossGauge");
+		if (uiObj != null)
+		{
+			if (uiObj.TryGetComponent(out LifeGauge lifeGauge))
+			{
+				lifeGauge.Life = Life;
+			}
+		}
+
+		//タイマーを初期化
 		m_ShotTimer = 0.0f;
 		m_ShotIntrvalTimer = m_ShotInterval / 2;
 	}
