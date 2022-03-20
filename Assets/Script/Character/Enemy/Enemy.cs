@@ -178,6 +178,22 @@ public class Enemy : MonoBehaviour
 		Debug.Log("ダメージを受けた");
 	}
 
+	/// <summary>
+	/// 活動範囲か？
+	/// </summary>
+	/// <returns> 活動範囲内ならtrueを返す </returns>
+	protected bool IsActiveArea()
+	{
+		float posX = m_Transform.position.x + m_Collider.radius;
+		float posY = m_Transform.position.y + m_Collider.radius;
+		if (posX >= MyScreen.BottomLeft.x && posX <= MyScreen.TopRight.x &&
+			posY >= MyScreen.BottomLeft.y && posY <= MyScreen.TopRight.y)
+		{
+			return true;
+		}
+		return false;
+	}
+
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (collision.CompareTag("Player"))

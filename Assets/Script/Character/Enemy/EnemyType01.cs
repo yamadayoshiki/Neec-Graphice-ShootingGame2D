@@ -21,8 +21,12 @@ public class EnemyType01 : Enemy
 	{
 		//移動処理
 		Move();
-		//攻撃処理
-		Attack();
+
+		//左画面奥に移動したら削除する
+		if(MyScreen.BottomLeft.x + -100.0f >= m_Transform.position.x + Collider.radius)
+		{
+			Life.ApplayDamage(Life.MaxHitPoint);
+		}
 	}
 
 	/// <summary>
@@ -47,8 +51,6 @@ public class EnemyType01 : Enemy
 
 		//座標を反映
 		m_Transform.position = nextPos;
-
-
 	}
 
 	/// <summary>
@@ -75,7 +77,8 @@ public class EnemyType01 : Enemy
 	/// </summary>
 	protected override void DamageReaction()
 	{
-		Debug.Log("ダメージを受けた");
+		//自分にもダメージ時与えて死亡させる
+		Life.ApplayDamage(Life.MaxHitPoint);
 	}
 }
 
