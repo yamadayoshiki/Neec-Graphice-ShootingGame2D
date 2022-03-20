@@ -26,12 +26,6 @@ public class Enemy : MonoBehaviour
 	public Life Life { get { return m_Life; } }
 
 	/// <summary>
-	/// カメラ
-	/// </summary>
-	[SerializeField]
-	private Camera m_Camera = null;
-
-	/// <summary>
 	/// シューター
 	/// </summary>
 	[SerializeField]
@@ -67,13 +61,24 @@ public class Enemy : MonoBehaviour
 	[SerializeField]
 	protected Vector3 m_MoveDirection = -Vector2.right;
 
+	/// <summary>
+	/// ダメージエフェクト
+	/// </summary>
+	[SerializeField]
+	protected GameObject m_HitEffect = null;
+
+	/// <summary>
+	/// 爆発エフェクト
+	/// </summary>
+	[SerializeField]
+	protected GameObject m_ExplosionEffect = null;
+
 	protected virtual void OnEnable()
 	{
 		//コンポーネントを取得
 		TryGetComponent(out m_Rigidbody);
 		TryGetComponent(out m_Collider);
 		TryGetComponent(out m_Life);
-		if (m_Camera == null) m_Camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 		if (!TryGetComponent(out m_Shooter)) m_Shooter = GetComponentInChildren<Shooter>();
 
 		m_Transform = this.transform;
@@ -178,6 +183,39 @@ public class Enemy : MonoBehaviour
 		Debug.Log("ダメージを受けた");
 	}
 
+	/// <summary>
+	/// 活動範囲か？
+	/// </summary>
+	/// <returns> 活動範囲内ならtrueを返す </returns>
+	protected bool IsActiveArea()
+	{
+		float posX = m_Transform.position.x + m_Collider.radius;
+		float posY = m_Transform.position.y + m_Collider.radius;
+		if (posX >= MyScreen.BottomLeft.x && posX <= MyScreen.TopRight.x &&
+			posY >= MyScreen.BottomLeft.y && posY <= MyScreen.TopRight.y)
+		{
+			return true;
+		}
+		return false;
+	}
+
+	/// <summary>
+	///	ダメージエフェクトの生成
+	/// </summary>
+	/// <param name="effectPrefb"> 生成するエフェクトオブジェクト </param>
+	/// <param name="position"> 生成座標 </param>
+	/// <param name="moveDir"> 移動方向 </param>
+	protected void CreateDamageEffect(GameObject effectPrefb, Vector3 position, Vector3 moveDir)
+	{
+		//生成時の角度
+		float angle = Random.Range(0, 360);
+		Quaternion rotate = Quaternion.Euler(0, 0, angle);
+		//エフェクトを生成
+		var effect = Instantiate(effectPrefb, position, rotate).GetComponent<DamageEffect>();
+		//エフェクトの移動方向を設定
+		effect.MoveDirection = moveDir;
+	}
+
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (collision.CompareTag("Player"))
@@ -187,8 +225,6 @@ public class Enemy : MonoBehaviour
 			{
 				life.ApplayDamage(DamageValue);
 			}
-			//自分を削除
-			Destroy(gameObject);
 		}
 	}
 }

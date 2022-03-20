@@ -29,6 +29,17 @@ public class Life : MonoBehaviour
 	}
 
 	/// <summary>
+	/// 耐久値の割合
+	/// </summary>
+	public float LifeRate
+	{
+		get
+		{
+			return (float)m_HitPoint / (float)m_MaxHitPoint;
+		}
+	}
+
+	/// <summary>
 	/// 無敵フラグ
 	/// </summary>
 	[SerializeField]
