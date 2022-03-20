@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a6352e6c60dcac429be35b5b2b3b367, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BulletPrefab: {fileID: 7462654164361381875, guid: dc326fe3a029dcb409dfcb27316d0362, type: 3}
+  m_BulletPrefab: {fileID: 5833301151731253195, guid: 881c20ea605c8144b8b9f89a420ba3d3, type: 3}
   m_RapidIntarval: 0.1
 --- !u!1 &2538254198670681352
 GameObject:
@@ -228,8 +228,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f0cc5c7bd1010f41bc8882beccfeb3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Camera: {fileID: 0}
   m_Shooter: {fileID: 0}
   m_MoveSpeed: 100
   m_DamageValue: 1
   m_MoveDirection: {x: -1, y: 1, z: 0}
+  m_HitEffect: {fileID: 6918124987673872572, guid: 38e5877be1fe26642b9a8d991cce7eab, type: 3}
+  m_ExplosionEffect: {fileID: 5308712640816696449, guid: 639a88c676d14e64bb1e4cc968889049, type: 3}

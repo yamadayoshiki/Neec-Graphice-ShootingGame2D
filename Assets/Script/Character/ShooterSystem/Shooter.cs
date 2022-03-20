@@ -35,7 +35,7 @@ public class Shooter : MonoBehaviour
 	public void Fire(Vector2 direction)
 	{
 		if (m_RapidTimer <= 0.0f)
-		{	//弾を生成
+		{   //弾を生成
 			CreateBullet(direction);
 			//初期化
 			ResetTimer();
@@ -48,10 +48,10 @@ public class Shooter : MonoBehaviour
 	/// <summary>
 	/// 弾の生成
 	/// </summary>
-	private void CreateBullet(Vector2 direction)
+	private void CreateBullet(Vector2 direction, int damegeValue = 1)
 	{
 		var bullet = Instantiate(m_BulletPrefab, this.transform.position, Quaternion.identity).GetComponent<Bullet>();
-		bullet.DamageValue = 1;
+		bullet.DamageValue = damegeValue;
 		bullet.MoveDirection = direction;
 		bullet.Initialize();
 

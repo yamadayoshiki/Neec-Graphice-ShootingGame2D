@@ -68,6 +68,9 @@ public class EnemyType01 : Enemy
 	{
 		if (!Life.IsDead) return;
 
+		//エフェクトを生成
+		CreateDamageEffect(m_HitEffect, m_Transform.position, Vector3.right);
+
 		//自分を削除
 		Destroy(gameObject);
 	}

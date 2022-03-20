@@ -31,6 +31,8 @@ public class Flash : MonoBehaviour
 	private void Start()
 	{
 		IsActive = false;
+		m_SpriteRenderer.DOFade(1.0f, 0.01f);
+		m_SpriteRenderer.enabled = false;
 	}
 
 	/// <summary>
@@ -38,9 +40,12 @@ public class Flash : MonoBehaviour
 	/// </summary>
 	public void StartFlash()
 	{
+		if (IsActive) return;
 		IsActive = true;
+		m_SpriteRenderer.enabled = true;
 		m_Tween = m_SpriteRenderer.DOFade(0.0f, m_FlashSpan).SetLoops(m_FlashTimes, LoopType.Yoyo).OnComplete(() => {
 			m_SpriteRenderer.DOFade(1.0f, 0.01f);
+			m_SpriteRenderer.enabled = false;
 			IsActive = false;
 		});
 	}

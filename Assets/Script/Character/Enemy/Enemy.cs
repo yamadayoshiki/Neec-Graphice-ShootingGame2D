@@ -61,6 +61,18 @@ public class Enemy : MonoBehaviour
 	[SerializeField]
 	protected Vector3 m_MoveDirection = -Vector2.right;
 
+	/// <summary>
+	/// ダメージエフェクト
+	/// </summary>
+	[SerializeField]
+	protected GameObject m_HitEffect = null;
+
+	/// <summary>
+	/// 爆発エフェクト
+	/// </summary>
+	[SerializeField]
+	protected GameObject m_ExplosionEffect = null;
+
 	protected virtual void OnEnable()
 	{
 		//コンポーネントを取得
@@ -185,6 +197,23 @@ public class Enemy : MonoBehaviour
 			return true;
 		}
 		return false;
+	}
+
+	/// <summary>
+	///	ダメージエフェクトの生成
+	/// </summary>
+	/// <param name="effectPrefb"> 生成するエフェクトオブジェクト </param>
+	/// <param name="position"> 生成座標 </param>
+	/// <param name="moveDir"> 移動方向 </param>
+	protected void CreateDamageEffect(GameObject effectPrefb, Vector3 position, Vector3 moveDir)
+	{
+		//生成時の角度
+		float angle = Random.Range(0, 360);
+		Quaternion rotate = Quaternion.Euler(0, 0, angle);
+		//エフェクトを生成
+		var effect = Instantiate(effectPrefb, position, rotate).GetComponent<DamageEffect>();
+		//エフェクトの移動方向を設定
+		effect.MoveDirection = moveDir;
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
