@@ -32,11 +32,11 @@ public class Shooter : MonoBehaviour
 	/// <summary>
 	/// 射撃
 	/// </summary>
-	public void Fire(Vector2 direction)
+	public void Fire(Vector2 direction, int damageValue = 1)
 	{
 		if (m_RapidTimer <= 0.0f)
 		{   //弾を生成
-			CreateBullet(direction);
+			CreateBullet(direction, damageValue);
 			//初期化
 			ResetTimer();
 		}

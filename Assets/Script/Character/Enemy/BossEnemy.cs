@@ -75,6 +75,11 @@ public class BossEnemy : Enemy
 	private float m_ShotIntrvalTimer = 0.0f;
 
 	/// <summary>
+	/// ターゲット
+	/// </summary>
+	private Transform m_Target = null;
+
+	/// <summary>
 	/// 初期化
 	/// </summary>
 	public override void Initlaize()
@@ -94,6 +99,12 @@ public class BossEnemy : Enemy
 				lifeGauge.Life = Life;
 			}
 		}
+
+		//登場時の目的位置を取得
+		m_AppearanceMovePoint = GameObject.Find("AppearanceMovePoint").transform;
+
+		//Playerを取得
+		m_Target = GameObject.FindGameObjectWithTag("Player").transform;
 
 		//タイマーを初期化
 		m_ShotTimer = 0.0f;
@@ -205,8 +216,12 @@ public class BossEnemy : Enemy
 	{
 		if (m_ShotIntrvalTimer >= m_ShotInterval)
 		{
+			//ターゲットの方向を求める
+			Vector3 direction = Vector3.left;
+			if (m_Target != null) direction = (m_Target.position - m_Transform.position).normalized;
+
 			//弾を一定間隔で打つ
-			Shooter.Fire(Vector2.left);
+			Shooter.Fire(direction);
 			if(m_ShotTimer >= m_ShotTime)
 			{
 				m_ShotIntrvalTimer = 0.0f;

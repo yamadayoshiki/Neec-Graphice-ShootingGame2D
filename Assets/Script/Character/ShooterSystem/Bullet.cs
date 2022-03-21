@@ -33,6 +33,12 @@ public class Bullet : MonoBehaviour
 	private float m_MoveSpeed = 600.0f;
 
 	/// <summary>
+	/// 活動範囲のオフセット
+	/// </summary>
+	[SerializeField]
+	private float m_AreaOffset = 100.0f;
+
+	/// <summary>
 	/// 自分のトランスフォーム
 	/// </summary>
 	private Transform m_Transform = null;
@@ -64,6 +70,28 @@ public class Bullet : MonoBehaviour
 		Vector3 velocity = MoveDirection.normalized * m_MoveSpeed;
 		//現在の座標に移動量を足す
 		m_Transform.position += velocity * Time.deltaTime;
+
+		//活動範囲外なら削除
+		if (!IsActiveArea())
+		{
+			Destroy(gameObject);
+		}
+	}
+
+	/// <summary>
+	/// 活動範囲か？
+	/// </summary>
+	/// <returns> 活動範囲内ならtrueを返す </returns>
+	protected bool IsActiveArea()
+	{
+		float posX = m_Transform.position.x + m_Collider.radius;
+		float posY = m_Transform.position.y + m_Collider.radius;
+		if (posX >= MyScreen.BottomLeft.x - m_AreaOffset && posX <= MyScreen.TopRight.x + m_AreaOffset &&
+			posY >= MyScreen.BottomLeft.y - m_AreaOffset && posY <= MyScreen.TopRight.y + m_AreaOffset)
+		{
+			return true;
+		}
+		return false;
 	}
 
 	/// <summary>
@@ -78,6 +106,9 @@ public class Bullet : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
+		//活動範囲外なら処理しない
+		if (!IsActiveArea()) return;
+
 		//相手の耐久値クラスを取得してダメージを適用する
 		if (collision.gameObject.TryGetComponent(out Life life))
 		{
