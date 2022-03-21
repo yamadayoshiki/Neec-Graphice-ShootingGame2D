@@ -49,6 +49,14 @@ namespace YY.Sound
 		/// </summary>
 		private readonly Dictionary<string, Queue<GameSeInfo>> m_PlaySeTable = new Dictionary<string, Queue<GameSeInfo>>();
 
+		protected override void Awake()
+		{
+			//オーディオソースの取得
+			m_AudioSource = GetComponent<AudioSource>();
+			//オーディオソースの初期化
+			InitializeAudioSource();
+		}
+
 		protected override void Start()
 		{
 			base.Start();

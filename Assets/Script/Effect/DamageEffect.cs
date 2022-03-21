@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using YY.Sound;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class DamageEffect : MonoBehaviour
@@ -24,6 +25,12 @@ public class DamageEffect : MonoBehaviour
 	}
 
 	/// <summary>
+	/// 再生SEハンドル
+	/// </summary>
+	[SerializeField]
+	private SE m_SeHandle;
+
+	/// <summary>
 	/// 移動速度
 	/// </summary>
 	[SerializeField]
@@ -43,6 +50,9 @@ public class DamageEffect : MonoBehaviour
 		//スケール値を0にする
 		transform.localScale = Vector3.zero;
 		var seq = DOTween.Sequence();
+
+		//SEを再生
+		SoundManager.Instance.PlayMenuSE((int)m_SeHandle);
 
 		//拡大のアニメーション
 		seq.Append(transform.DOScale(Vector2.one * m_Scale, 0.5f));

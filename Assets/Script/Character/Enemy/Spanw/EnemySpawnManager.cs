@@ -69,7 +69,15 @@ public class EnemySpawnManager : MonoBehaviour
 	private void Update()
 	{
 		//非アクティブなら処理しない
-		if (!IsActive) return;
+		if (!IsActive)
+		{
+			IsActive = false;
+			return;
+		}
+		else
+		{
+			IsActive = true;
+		}
 
 		//すべての生成が終了したか調べる
 		bool isEnd = true;
