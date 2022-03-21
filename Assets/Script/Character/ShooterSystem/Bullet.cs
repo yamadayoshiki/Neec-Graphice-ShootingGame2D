@@ -72,7 +72,7 @@ public class Bullet : MonoBehaviour
 		m_Transform.position += velocity * Time.deltaTime;
 
 		//活動範囲外なら削除
-		if (!IsActiveArea())
+		if (!IsActiveArea(m_AreaOffset))
 		{
 			Destroy(gameObject);
 		}
@@ -82,12 +82,12 @@ public class Bullet : MonoBehaviour
 	/// 活動範囲か？
 	/// </summary>
 	/// <returns> 活動範囲内ならtrueを返す </returns>
-	protected bool IsActiveArea()
+	protected bool IsActiveArea(float offset = 0f)
 	{
 		float posX = m_Transform.position.x + m_Collider.radius;
 		float posY = m_Transform.position.y + m_Collider.radius;
-		if (posX >= MyScreen.BottomLeft.x - m_AreaOffset && posX <= MyScreen.TopRight.x + m_AreaOffset &&
-			posY >= MyScreen.BottomLeft.y - m_AreaOffset && posY <= MyScreen.TopRight.y + m_AreaOffset)
+		if (posX >= MyScreen.BottomLeft.x - offset && posX <= MyScreen.TopRight.x + offset &&
+			posY >= MyScreen.BottomLeft.y - offset && posY <= MyScreen.TopRight.y + offset)
 		{
 			return true;
 		}
