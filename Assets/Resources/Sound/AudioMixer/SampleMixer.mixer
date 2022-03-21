@@ -167,6 +167,8 @@ AudioMixerController:
   m_ExposedParameters:
   - guid: 0d5c6d03ab626db4cbabcf869a3d3034
     name: BGMVolum
+  - guid: 01a6e417e5858884c8e74152c41594a8
+    name: SEVolum
   m_AudioMixerGroupViews:
   - guids:
     - 37dcc6a2047bc0d469463cd90a5142f6
@@ -227,7 +229,7 @@ AudioMixerSnapshotController:
   m_FloatValues:
     0f79f115e31ca4648946f83006604a9c: -9.332112
     6a685eb6c55954c419b0af51843869d5: -19.928473
-    01a6e417e5858884c8e74152c41594a8: -0.025776558
+    01a6e417e5858884c8e74152c41594a8: -9.833286
     cf4e42c937a439a4fa4a1c6da2c3deca: -6.991066
     439f1f9d1720bc94e9bb6117858413a9: -19.928473
   m_TransitionOverrides: {}

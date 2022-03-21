@@ -66,7 +66,7 @@ public class EnemyType02 : Enemy
 	protected override void Attack()
 	{
 		//弾を一定間隔で打つ
-		Shooter.Fire(Vector2.left);
+		Shooter.Fire(Vector2.left, (int)SE.SE08_shotE);
 	}
 
 	/// <summary>

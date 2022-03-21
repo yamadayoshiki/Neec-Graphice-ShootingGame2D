@@ -226,7 +226,7 @@ public class BossEnemy : Enemy
 			if (m_Target != null) direction = (m_Target.position - m_Transform.position).normalized;
 
 			//弾を一定間隔で打つ
-			Shooter.Fire(direction);
+			Shooter.Fire(direction, (int)SE.SE08_shotE);
 			if(m_ShotTimer >= m_ShotTime)
 			{
 				m_ShotIntrvalTimer = 0.0f;

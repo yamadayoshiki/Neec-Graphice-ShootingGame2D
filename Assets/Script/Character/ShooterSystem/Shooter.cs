@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using YY.Sound;
 
 public class Shooter : MonoBehaviour
 {
@@ -32,10 +33,13 @@ public class Shooter : MonoBehaviour
 	/// <summary>
 	/// 射撃
 	/// </summary>
-	public void Fire(Vector2 direction, int damageValue = 1)
+	public void Fire(Vector2 direction, int seHandle = -1, int damageValue = 1)
 	{
 		if (m_RapidTimer <= 0.0f)
-		{   //弾を生成
+		{
+			//SEを再生
+			if(seHandle != -1) SoundManager.Instance.PlayMenuSE(seHandle);
+			//弾を生成
 			CreateBullet(direction, damageValue);
 			//初期化
 			ResetTimer();

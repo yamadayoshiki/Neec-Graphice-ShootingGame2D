@@ -136,7 +136,7 @@ public class PlayerController : MonoBehaviour
 		//UŒ‚ˆ—
 		if (Input.GetButton("Fire1"))
 		{
-			m_Shooter.Fire(Vector2.right);
+			m_Shooter.Fire(Vector2.right,(int)SE.SE07_shot);
 		}
 		else
 		{
