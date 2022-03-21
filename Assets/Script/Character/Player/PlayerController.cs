@@ -36,12 +36,6 @@ public class PlayerController : MonoBehaviour
 	private SpriteRenderer m_Damage = null;
 
 	/// <summary>
-	/// カメラ
-	/// </summary>
-	[SerializeField]
-	private Camera m_Camera = null;
-
-	/// <summary>
 	/// シューター
 	/// </summary>
 	[SerializeField]
@@ -100,7 +94,6 @@ public class PlayerController : MonoBehaviour
 		TryGetComponent(out m_Rigidbody);
 		TryGetComponent(out m_Collider);
 		TryGetComponent(out m_Life);
-		if (m_Camera == null) m_Camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 		if (!TryGetComponent(out m_Shooter)) m_Shooter = GetComponentInChildren<Shooter>();
 		m_Transform = this.transform;
 
