@@ -86,8 +86,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6d147a45dd0b2d40b575d3d97d6a538, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MaxHitPoint: 50
+  m_MaxHitPoint: 30
   m_HitPoint: 0
+  m_IsUseInvincible: 0
   m_IsInvincible: 0
   m_InvincibleTime: 0.3
 --- !u!114 &6498868539896120236

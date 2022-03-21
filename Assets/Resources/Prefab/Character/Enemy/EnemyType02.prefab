@@ -87,6 +87,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MaxHitPoint: 1
   m_HitPoint: 0
+  m_IsUseInvincible: 0
   m_IsInvincible: 0
   m_InvincibleTime: 0.3
 --- !u!114 &5575193008086044705

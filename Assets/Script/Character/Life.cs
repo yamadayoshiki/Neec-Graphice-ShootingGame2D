@@ -40,6 +40,12 @@ public class Life : MonoBehaviour
 	}
 
 	/// <summary>
+	/// 無敵時間をしようするか
+	/// </summary>
+	[SerializeField]
+	private bool m_IsUseInvincible = true;
+
+	/// <summary>
 	/// 無敵フラグ
 	/// </summary>
 	[SerializeField]
@@ -47,7 +53,7 @@ public class Life : MonoBehaviour
 	public bool IsInvicible 
 	{
 		get { return m_IsInvincible; }
-		private set { m_IsInvincible = value; }
+		set { m_IsInvincible = value; }
 	}
 
 	/// <summary>
@@ -108,8 +114,10 @@ public class Life : MonoBehaviour
 		//ダメージを受けた時のリアクションを行う
 		else if (DamageReaction != null) DamageReaction();
 
-		//無敵処理を行う
-		StartCoroutine(nameof(Invincible));
+		if (m_IsUseInvincible)
+		{	//無敵処理を行う
+			StartCoroutine(nameof(Invincible));
+		}
 	}
 
 	/// <summary>

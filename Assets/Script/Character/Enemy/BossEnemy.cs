@@ -109,6 +109,9 @@ public class BossEnemy : Enemy
 		//タイマーを初期化
 		m_ShotTimer = 0.0f;
 		m_ShotIntrvalTimer = m_ShotInterval / 2;
+
+		//無敵状態にする
+		Life.IsInvicible = true;
 	}
 
 	protected override void Update()
@@ -149,6 +152,8 @@ public class BossEnemy : Enemy
 		//目的位置との距離が10ピクセル以下なら状態を通常行動にする
 		if (distance <= 10f)
 		{
+			//無敵状態を解除
+			Life.IsInvicible = false;
 			//移動方向を上に設定する
 			m_MoveDirection = Vector3.up;
 			m_State = BossState.Normal;
@@ -259,6 +264,12 @@ public class BossEnemy : Enemy
 			Quaternion rotate = Quaternion.Euler(0, 0, angle);
 			//エフェクトを生成
 			CreateDamageEffect(m_ExplosionEffect, pos, Vector3.right);
+		}
+
+		if (GamePlayManager.Instance != null)
+		{
+			//ゲーム終了処理を行う
+			GamePlayManager.Instance.GameEnd(true, GamePlayManager.GameEndType.Claer);
 		}
 	}
 
