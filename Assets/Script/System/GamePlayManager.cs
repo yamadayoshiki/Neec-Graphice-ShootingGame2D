@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using YY.Sound;
 
 public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
 {
@@ -48,6 +49,17 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
 	[SerializeField]
 	private ImageController m_OverImageCtr = null;
 
+	/// <summary>
+	/// シーン遷移タイマー
+	/// </summary>
+	[SerializeField]
+	private float m_SceneTransitionTime = 8.0f;
+
+	/// <summary>
+	/// タイマー
+	/// </summary>
+	private float m_Timer = 0.0f;
+
 	private void Start()
 	{
 		//初期化
@@ -64,7 +76,20 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
 	public void Initialize()
 	{
 		Score = 0;
+		m_Timer = 0.0f;
 		IsGameEnd = false;
+	}
+
+	private void Update()
+	{
+		if (IsGameEnd)
+		{
+			if(m_Timer >= m_SceneTransitionTime)
+			{
+				//シーン遷移
+			}
+			m_Timer += Time.deltaTime;
+		}
 	}
 
 	/// <summary>
@@ -76,8 +101,6 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
 	{
 		if (isEnd == false) return;
 		m_IsGameEnd = isEnd;
-		//フェードアウトする
-		FadeController.Instance.FadeOut(m_FadeTime);
 		switch (endType)
 		{
 			case GameEndType.Claer:
@@ -94,7 +117,8 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
 	/// </summary>
 	private void Clear()
 	{
-		m_ClaerImageCtr.FadeScale(Vector3.one, 1.0f, 2.0f);
+		Tween tween = m_ClaerImageCtr.FadeScale(Vector3.one, 1.0f, 2.0f);
+		tween.OnStart(() => SoundManager.Instance.PlayMenuSE((int)SE.SE17_clear));
 		m_ClaerImageCtr.Flash(1.0f, 3.0f);
 	}
 
@@ -103,6 +127,9 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
 	/// </summary>
 	private void Over()
 	{
-		m_OverImageCtr.FadeScale(Vector3.one, 1.0f, 2.0f);
+		//フェードアウトする
+		FadeController.Instance.FadeOut(m_FadeTime);
+		Tween tween = m_OverImageCtr.FadeScale(Vector3.one, 1.0f, 2.0f);
+		tween.OnStart(() => SoundManager.Instance.PlayMenuSE((int)SE.SE16_over));
 	}
 }

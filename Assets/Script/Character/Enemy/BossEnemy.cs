@@ -104,7 +104,8 @@ public class BossEnemy : Enemy
 		m_AppearanceMovePoint = GameObject.Find("AppearanceMovePoint").transform;
 
 		//Playerを取得
-		m_Target = GameObject.FindGameObjectWithTag("Player").transform;
+		var target = GameObject.FindGameObjectWithTag("Player").transform;
+		if (target != null) m_Target = target;
 
 		//タイマーを初期化
 		m_ShotTimer = 0.0f;

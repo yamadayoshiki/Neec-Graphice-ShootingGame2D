@@ -134,7 +134,7 @@ public class PlayerController : MonoBehaviour
 		//ˆÚ“®ˆ—
 		Move();
 		//UŒ‚ˆ—
-		if (Input.GetButton("Fire1"))
+		if (Input.GetButton("Fire1") || Input.GetKey(KeyCode.Z))
 		{
 			m_Shooter.Fire(Vector2.right,(int)SE.SE07_shot);
 		}

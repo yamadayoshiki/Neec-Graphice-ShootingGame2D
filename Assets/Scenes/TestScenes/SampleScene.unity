@@ -1471,7 +1471,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2468756700841863683, guid: 9aae1a7456e3a6d46821cd7c46097264, type: 3}
       propertyPath: m_SortingOrder
-      value: 99
+      value: 29
       objectReference: {fileID: 0}
     - target: {fileID: 2468756700841863684, guid: 9aae1a7456e3a6d46821cd7c46097264, type: 3}
       propertyPath: m_Name
@@ -2369,6 +2369,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1681634039}
   m_CullTransparentMesh: 1
+--- !u!1 &1706832264
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1706832265}
+  m_Layer: 0
+  m_Name: -----------------
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1706832265
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1706832264}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -127.039474, y: -26.552084, z: 38.438637}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1784449911
 GameObject:
   m_ObjectHideFlags: 0
@@ -2575,6 +2605,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6987019185028332349, guid: 75c504d55dcae9b4ebf8c9ab645a9b77, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6987019185028332350, guid: 75c504d55dcae9b4ebf8c9ab645a9b77, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -2632,6 +2666,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6430201540428782601, guid: 07f59bcb62e672347be540e21d5460e5, type: 3}
+      propertyPath: m_IsPlayOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6430201540428782601, guid: 07f59bcb62e672347be540e21d5460e5, type: 3}
+      propertyPath: m_3DSoundSetting
+      value: 
+      objectReference: {fileID: 11400000, guid: b66f7d9d7300a4c47b66dac055f23969, type: 2}
+    - target: {fileID: 7209585757940056722, guid: 07f59bcb62e672347be540e21d5460e5, type: 3}
+      propertyPath: m_MaxHitPoint
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7209585757940056724, guid: 07f59bcb62e672347be540e21d5460e5, type: 3}
       propertyPath: m_Name
       value: Player

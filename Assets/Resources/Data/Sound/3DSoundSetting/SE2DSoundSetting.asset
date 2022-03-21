@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79d005c465e4b784aa8fe8b5b4605413, type: 3}
   m_Name: SE2DSoundSetting
   m_EditorClassIdentifier: 
-  m_SpatialBlend: 1
+  m_SpatialBlend: 0
   m_DopplerLevel: 0
   m_Spread: 0
   m_MinDistance: 5

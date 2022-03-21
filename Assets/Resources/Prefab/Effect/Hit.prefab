@@ -97,6 +97,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 6918124987673872574}
   m_MoveDirection: {x: 0, y: 0, z: 0}
-  m_SeHandle: 4
+  m_SeHandle: 3
   m_MoveSpeed: 50
   m_Scale: 2
