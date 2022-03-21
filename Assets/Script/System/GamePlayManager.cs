@@ -31,6 +31,12 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
 	}
 
 	/// <summary>
+	/// フェード時間
+	/// </summary>
+	[SerializeField]
+	private float m_FadeTime = 2.0f;
+
+	/// <summary>
 	/// ゲームクリアイメージコントローラー
 	/// </summary>
 	[SerializeField]
@@ -42,6 +48,15 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
 	[SerializeField]
 	private ImageController m_OverImageCtr = null;
 
+	private void Start()
+	{
+		//初期化
+		Initialize();
+
+		//フェードコントローラーを初期化
+		FadeController.Instance.Initilaize();
+		FadeController.Instance.FadeIn(1.0f);
+	}
 
 	/// <summary>
 	/// 初期化
@@ -61,6 +76,8 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
 	{
 		if (isEnd == false) return;
 		m_IsGameEnd = isEnd;
+		//フェードアウトする
+		FadeController.Instance.FadeOut(m_FadeTime);
 		switch (endType)
 		{
 			case GameEndType.Claer:
