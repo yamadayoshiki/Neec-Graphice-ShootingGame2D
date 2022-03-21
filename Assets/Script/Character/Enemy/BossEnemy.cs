@@ -100,6 +100,9 @@ public class BossEnemy : Enemy
 			}
 		}
 
+		//登場時の目的位置を取得
+		m_AppearanceMovePoint = GameObject.Find("AppearanceMovePoint").transform;
+
 		//Playerを取得
 		m_Target = GameObject.FindGameObjectWithTag("Player").transform;
 
