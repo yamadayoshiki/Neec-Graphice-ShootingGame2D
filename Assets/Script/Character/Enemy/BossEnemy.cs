@@ -247,6 +247,9 @@ public class BossEnemy : Enemy
 	{
 		if (!Life.IsDead) return;
 
+		//スコアを加算
+		if (GamePlayManager.Instance != null) GamePlayManager.Instance.Score += 1000;
+
 		m_Damage.enabled = false;
 		m_Default.DOFade(0.0f, m_FadeTime).OnComplete(() => {
 			//フェードアウト完了後機能を停止
@@ -286,6 +289,23 @@ public class BossEnemy : Enemy
 		Quaternion rotate = Quaternion.Euler(0, 0, angle);
 		//エフェクトを生成
 		CreateDamageEffect(m_HitEffect, m_Transform.position, Vector3.right);
+	}
+
+
+	/// <summary>
+	/// 衝突処理
+	/// </summary>
+	/// <param name="collision"></param>
+	protected override void Collision(Collider2D collision)
+	{
+		if (collision.CompareTag("Player"))
+		{
+			//相手の耐久値クラスを取得してダメージを適用する
+			if (collision.gameObject.TryGetComponent(out Life life))
+			{
+				life.ApplayDamage(DamageValue);
+			}
+		}
 	}
 
 	/// <summary>

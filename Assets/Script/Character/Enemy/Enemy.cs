@@ -216,7 +216,11 @@ public class Enemy : MonoBehaviour
 		effect.MoveDirection = moveDir;
 	}
 
-	private void OnTriggerEnter2D(Collider2D collision)
+	/// <summary>
+	/// Õ“Ëˆ—
+	/// </summary>
+	/// <param name="collision"></param>
+	protected virtual void Collision(Collider2D collision)
 	{
 		if (collision.CompareTag("Player"))
 		{
@@ -225,6 +229,13 @@ public class Enemy : MonoBehaviour
 			{
 				life.ApplayDamage(DamageValue);
 			}
+			//ƒvƒŒƒCƒ„[‚ÆÕ“Ë‚µ‚½‚ç©•ª‚ğ€–S‚³‚¹‚é
+			Life.ApplayDamage(Life.MaxHitPoint);
 		}
+	}
+
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		Collision(collision);
 	}
 }

@@ -68,6 +68,9 @@ public class EnemyType01 : Enemy
 	{
 		if (!Life.IsDead) return;
 
+		//スコアを加算
+		if (GamePlayManager.Instance != null) GamePlayManager.Instance.Score += 10;
+
 		//エフェクトを生成
 		CreateDamageEffect(m_HitEffect, m_Transform.position, Vector3.right);
 

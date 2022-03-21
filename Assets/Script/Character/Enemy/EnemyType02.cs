@@ -76,6 +76,9 @@ public class EnemyType02 : Enemy
 	{
 		if (!Life.IsDead) return;
 
+		//スコアを加算
+		if (GamePlayManager.Instance != null) GamePlayManager.Instance.Score += 25;
+
 		//エフェクトを生成
 		CreateDamageEffect(m_ExplosionEffect, m_Transform.position, Vector3.right);
 
