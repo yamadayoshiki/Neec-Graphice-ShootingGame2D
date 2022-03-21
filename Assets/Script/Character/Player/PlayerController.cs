@@ -218,6 +218,12 @@ public class PlayerController : MonoBehaviour
 			CreateDamageEffect(m_ExplosionEffect, pos, Vector3.left);
 		}
 
+		if(GamePlayManager.Instance != null)
+		{
+			//ƒQ[ƒ€I—¹ˆ—‚ğs‚¤
+			GamePlayManager.Instance.GameEnd(true, GamePlayManager.GameEndType.Over);
+		}
+
 	}
 
 	/// <summary>
