@@ -14,7 +14,19 @@ public class ImageController : MonoBehaviour
 
 	private void Start()
 	{
-		transform.localScale = Vector3.zero;
+		//transform.localScale = Vector3.zero;
+	}
+
+	/// <summary>
+	/// アルファ値のフェード
+	/// </summary>
+	/// <param name="endValue"></param>
+	/// <param name="fadeTime"></param>
+	/// <param name="deley"></param>
+	/// <returns></returns>
+	public Tween AlphaFade(float endValue, float fadeTime, float deley = 0.0f)
+	{
+		return m_Image.DOFade(endValue, fadeTime).SetEase(Ease.Linear).SetDelay(deley);
 	}
 
 	/// <summary>
