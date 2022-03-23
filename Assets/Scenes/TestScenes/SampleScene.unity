@@ -1471,7 +1471,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2468756700841863683, guid: 9aae1a7456e3a6d46821cd7c46097264, type: 3}
       propertyPath: m_SortingOrder
-      value: 29
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 2468756700841863684, guid: 9aae1a7456e3a6d46821cd7c46097264, type: 3}
       propertyPath: m_Name
@@ -2055,6 +2055,7 @@ MonoBehaviour:
   m_FadeTime: 2
   m_ClaerImageCtr: {fileID: 1055626248}
   m_OverImageCtr: {fileID: 1472471493}
+  m_SceneTransitionTime: 8
 --- !u!20 &1557564786 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 9187243644484739267, guid: 4e6408f17d001a84b88925e570322af0, type: 3}
@@ -2676,7 +2677,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: b66f7d9d7300a4c47b66dac055f23969, type: 2}
     - target: {fileID: 7209585757940056722, guid: 07f59bcb62e672347be540e21d5460e5, type: 3}
       propertyPath: m_MaxHitPoint
-      value: 1
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7209585757940056724, guid: 07f59bcb62e672347be540e21d5460e5, type: 3}
       propertyPath: m_Name

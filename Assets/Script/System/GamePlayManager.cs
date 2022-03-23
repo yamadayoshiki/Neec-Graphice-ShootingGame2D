@@ -84,9 +84,10 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
 	{
 		if (IsGameEnd)
 		{
-			if(m_Timer >= m_SceneTransitionTime)
+			//時間が経ったらまたはEnterキーを押されたらタイトルシーンに遷移
+			if (m_Timer >= m_SceneTransitionTime || Input.GetKeyDown(KeyCode.Return))
 			{
-				//シーン遷移
+				SceneLoader.Load(SceneHandle.TITLE);
 			}
 			m_Timer += Time.deltaTime;
 		}
