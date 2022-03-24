@@ -41,8 +41,8 @@ public class CreateNumberSprite : MonoBehaviour
 	/// </summary>
 	public void Init()
 	{
-		//Texture2D texture = SpriteRederManager.Instance.GetTexture2D(m_NumberTexture.name);
-		//if (texture != null) m_NumberTexture = texture;
+		Texture2D texture = SpriteRederManager.Instance.GetTexture2D(m_NumberTexture.name);
+		if (texture != null) m_NumberTexture = texture;
 		CreateSprite();
 	}
 

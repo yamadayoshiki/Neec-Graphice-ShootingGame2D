@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5833301151731253188}
   - component: {fileID: 5833301151731253189}
   - component: {fileID: 5833301151731253194}
+  - component: {fileID: 4059186943630523398}
   m_Layer: 7
   m_Name: Bullet_E
   m_TagString: EnemyBullet
@@ -136,3 +137,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MoveSpeed: 600
   m_AreaOffset: 100
+--- !u!114 &4059186943630523398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5833301151731253195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e6d1c9343d2098478766cb5a7656e46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PixcelParUint: 1
+  m_Extrude: 1
+  m_SpriteMeshType: 0
+  m_FilterMode: 0

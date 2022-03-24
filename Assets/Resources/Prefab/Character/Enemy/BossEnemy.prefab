@@ -126,6 +126,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6498868540195573203}
   - component: {fileID: 6498868540195573202}
+  - component: {fileID: 3366218276460809188}
   m_Layer: 7
   m_Name: DefaultImage
   m_TagString: Untagged
@@ -198,6 +199,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3366218276460809188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6498868540195573212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e6d1c9343d2098478766cb5a7656e46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PixcelParUint: 1
+  m_Extrude: 1
+  m_SpriteMeshType: 0
+  m_FilterMode: 0
 --- !u!1 &6498868540489606794
 GameObject:
   m_ObjectHideFlags: 0
@@ -209,6 +226,7 @@ GameObject:
   - component: {fileID: 6498868540489606793}
   - component: {fileID: 6498868540489606799}
   - component: {fileID: 6498868540489606792}
+  - component: {fileID: 3481281363066173089}
   m_Layer: 7
   m_Name: DamageImage
   m_TagString: Untagged
@@ -296,6 +314,22 @@ MonoBehaviour:
   m_SpriteRenderer: {fileID: 6498868540489606799}
   m_FlashSpan: 0.15
   m_FlashTimes: 6
+--- !u!114 &3481281363066173089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6498868540489606794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e6d1c9343d2098478766cb5a7656e46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PixcelParUint: 1
+  m_Extrude: 1
+  m_SpriteMeshType: 0
+  m_FilterMode: 0
 --- !u!1 &6498868541077974997
 GameObject:
   m_ObjectHideFlags: 0
