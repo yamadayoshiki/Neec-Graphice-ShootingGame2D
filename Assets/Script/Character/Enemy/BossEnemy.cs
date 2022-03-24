@@ -100,6 +100,12 @@ public class BossEnemy : Enemy
 			}
 		}
 
+		//ゲームプレイマネージャーに自身を渡す
+		if(GamePlayManager.Instance != null)
+		{
+			GamePlayManager.Instance.BossEnemy = this;
+		}
+
 		//登場時の目的位置を取得
 		m_AppearanceMovePoint = GameObject.Find("AppearanceMovePoint").transform;
 

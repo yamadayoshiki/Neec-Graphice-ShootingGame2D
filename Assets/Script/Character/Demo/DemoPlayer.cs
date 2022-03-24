@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-[RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(CircleCollider2D))]
-public class PlayerController : MonoBehaviour
+public class DemoPlayer : MonoBehaviour
 {
 	/// <summary>
 	/// リジッドボディ
@@ -82,9 +80,9 @@ public class PlayerController : MonoBehaviour
 	private float m_FadeTime = 1.0f;
 
 	/// <summary>
-	/// 入力方向ベクトル
+	/// 移動方向ベクトル
 	/// </summary>
-	private Vector3 m_InputDirection = Vector2.zero;
+	private Vector3 m_MoveDirection = Vector3.up;
 
 	private void Start()
 	{
@@ -105,18 +103,12 @@ public class PlayerController : MonoBehaviour
 
 		//耐久値ゲージに自分の耐久値クラスを渡す
 		var uiObj = GameObject.Find("PlayerGauge");
-		if(uiObj != null)
+		if (uiObj != null)
 		{
-			if(uiObj.TryGetComponent(out LifeGauge lifeGauge))
+			if (uiObj.TryGetComponent(out LifeGauge lifeGauge))
 			{
 				lifeGauge.Life = m_Life;
 			}
-		}
-
-		//ゲームプレイマネージャーに自身を渡す
-		if (GamePlayManager.Instance != null)
-		{
-			GamePlayManager.Instance.Player = this;
 		}
 
 		//初期化
@@ -130,36 +122,17 @@ public class PlayerController : MonoBehaviour
 	{
 		m_Life.Initialize();
 		m_Shooter.Initialize();
-		m_InputDirection = Vector2.zero;
 	}
 
 	private void Update()
 	{
-		//入力更新
-		InputUpdate();
 		//移動処理
 		Move();
 		//攻撃処理
-		if (Input.GetButton("Fire1") || Input.GetKey(KeyCode.Z))
-		{
-			m_Shooter.Fire(Vector2.right,(int)SE.SE07_shot);
-		}
-		else
-		{
-			m_Shooter.Initialize();
-		}
+		m_Shooter.Fire(Vector2.right, (int)SE.SE07_shot);
 
 		//画像切り替え
 		SwichImage();
-	}
-
-	/// <summary>
-	/// 入力更新
-	/// </summary>
-	private void InputUpdate()
-	{
-		//入力方向ベクトルを取得
-		m_InputDirection = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0).normalized;
 	}
 
 	/// <summary>
@@ -168,13 +141,22 @@ public class PlayerController : MonoBehaviour
 	private void Move()
 	{
 		//移動量を計算
-		Vector3 velocity = m_InputDirection * m_MoveSpeed;
+		Vector3 velocity = m_MoveDirection * m_MoveSpeed;
 		//移動先の座標を保持
 		Vector3 nextPos = m_Transform.position + velocity * Time.deltaTime;
 
-		/**** 画面外に出ないように補正処理 ********************************************************/
 		//当たり判定の半径を取得
 		float radius = m_Collider.radius;
+
+		//画面の上下端まで移動したらY軸移動方向を反転させる
+		float posY = Mathf.Abs(nextPos.y) + radius;
+		if (Mathf.Abs(MyScreen.BottomLeft.y) <= posY)
+		{
+			m_MoveDirection.y *= -1;
+		}
+
+		/**** 画面外に出ないように補正処理 ********************************************************/
+
 
 		//画面右上の座標を取得
 		Vector3 topRight = MyScreen.TopRight;
@@ -206,7 +188,7 @@ public class PlayerController : MonoBehaviour
 		});
 
 		//爆発エフェクトを生成
-		for(int i = 0;i < 3; i++)
+		for (int i = 0; i < 3; i++)
 		{
 			//生成する座標
 			Vector3 pos = m_Transform.position + new Vector3(Random.Range(-50.0f, 50.0f), Random.Range(-50.0f, 50.0f), 0);
@@ -217,7 +199,7 @@ public class PlayerController : MonoBehaviour
 			CreateDamageEffect(m_ExplosionEffect, pos, Vector3.left);
 		}
 
-		if(GamePlayManager.Instance != null)
+		if (GamePlayManager.Instance != null)
 		{
 			//ゲーム終了処理を行う
 			GamePlayManager.Instance.GameEnd(true, GamePlayManager.GameEndType.Over);
@@ -265,7 +247,7 @@ public class PlayerController : MonoBehaviour
 	/// <param name="effectPrefb"> 生成するエフェクトオブジェクト </param>
 	/// <param name="position"> 生成座標 </param>
 	/// <param name="moveDir"> 移動方向 </param>
-	private void CreateDamageEffect(GameObject effectPrefb,Vector3 position,Vector3 moveDir)
+	private void CreateDamageEffect(GameObject effectPrefb, Vector3 position, Vector3 moveDir)
 	{
 		//生成時の角度
 		float angle = Random.Range(0, 360);

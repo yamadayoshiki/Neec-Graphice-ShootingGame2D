@@ -56,6 +56,18 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
 	private float m_SceneTransitionTime = 8.0f;
 
 	/// <summary>
+	/// プレイヤー
+	/// </summary>
+	[SerializeField]
+	public PlayerController Player { get; set; }
+
+	/// <summary>
+	/// ボス
+	/// </summary>
+	[SerializeField]
+	public Enemy BossEnemy { get; set; }
+
+	/// <summary>
 	/// タイマー
 	/// </summary>
 	private float m_Timer = 0.0f;
@@ -82,6 +94,9 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
 
 	private void Update()
 	{
+		//デバッグコマンド
+		DebugCommand();
+
 		if (IsGameEnd)
 		{
 			//時間が経ったらまたはEnterキーを押されたらタイトルシーンに遷移
@@ -100,7 +115,7 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
 	/// <param name="endType"></param>
 	public void GameEnd(bool isEnd, GameEndType endType)
 	{
-		if (isEnd == false) return;
+		if (isEnd == false || m_IsGameEnd == true) return;
 		m_IsGameEnd = isEnd;
 		switch (endType)
 		{
@@ -132,5 +147,24 @@ public class GamePlayManager : SingletonMonoBehaviour<GamePlayManager>
 		FadeController.Instance.FadeOut(m_FadeTime);
 		Tween tween = m_OverImageCtr.FadeScale(Vector3.one, 1.0f, 2.0f);
 		tween.OnStart(() => SoundManager.Instance.PlayMenuSE((int)SE.SE16_over));
+	}
+
+	/// <summary>
+	/// デバッグコマンド
+	/// </summary>
+	private void DebugCommand()
+	{
+		//ゲームオーバーにする
+		if(Input.GetKeyDown(KeyCode.O) && Player != null)
+		{
+			if(Player.TryGetComponent(out Life life)){
+				life.ApplayDamage(life.MaxHitPoint);
+			}
+		}
+		//ゲームクリアにする
+		else if (Input.GetKeyDown(KeyCode.C))
+		{
+			GameEnd(true, GameEndType.Claer);
+		}
 	}
 }

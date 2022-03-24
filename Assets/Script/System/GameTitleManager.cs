@@ -51,10 +51,14 @@ public class GameTitleManager : MonoBehaviour
 
 	private void Start()
 	{
+		//フェードコントローラーを初期化
+		FadeController.Instance.Initilaize();
+		FadeController.Instance.FadeIn(0.5f);
+
 		MyScreen.Initialize();
 
-		m_TitleImageCtr.FadeScale(Vector3.zero, 0.1f);
-		m_OptionImageCtr.AlphaFade(0.0f, 0.1f);
+		m_TitleImageCtr.FadeScale(Vector3.zero, 0.01f);
+		m_OptionImageCtr.AlphaFade(0.0f, 0.01f);
 		m_IsTransition = false;
 		m_Timer = 0.0f;
 
@@ -75,10 +79,6 @@ public class GameTitleManager : MonoBehaviour
 		{
 			//画像切り替え
 			m_SeImageSwithcer.Switch();
-			m_IsMute = !m_IsMute;
-			//音量調整
-			if (m_IsMute) SoundManager.Instance.GetAudioMixerManager().MasterVolumeByLinear = 0.0f;
-			else SoundManager.Instance.GetAudioMixerManager().MasterVolumeByLinear = 1.0f;
 		}
 
 		//遷移可能でなければ処理しない
