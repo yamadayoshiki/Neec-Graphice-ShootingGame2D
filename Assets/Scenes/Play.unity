@@ -2913,7 +2913,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: b66f7d9d7300a4c47b66dac055f23969, type: 2}
     - target: {fileID: 7209585757940056722, guid: 07f59bcb62e672347be540e21d5460e5, type: 3}
       propertyPath: m_MaxHitPoint
-      value: 100
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 7209585757940056724, guid: 07f59bcb62e672347be540e21d5460e5, type: 3}
       propertyPath: m_Name
