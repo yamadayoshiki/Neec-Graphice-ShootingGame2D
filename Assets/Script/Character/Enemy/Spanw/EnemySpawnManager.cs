@@ -42,6 +42,11 @@ public class EnemySpawnManager : MonoBehaviour
 	/// </summary>
 	private int m_SpawnCounter = 0;
 
+	/// <summary>
+	/// ボス生成フラグ
+	/// </summary>
+	private bool m_IsBossSpawn = false;
+
 	private void Start()
 	{
 		//初期化
@@ -92,8 +97,12 @@ public class EnemySpawnManager : MonoBehaviour
 			if (m_SpawnCounter >= m_SpawnDataList.Count)
 			{
 				//BossEnemyを生成
-				Instantiate(m_BossSpawnData.EnemyPrefab, transform.position, Quaternion.identity);
-				IsActive = false;
+				StartCoroutine(nameof(SpawnBossEnemy));
+				if (m_IsBossSpawn)
+				{
+					Instantiate(m_BossSpawnData.EnemyPrefab, transform.position, Quaternion.identity);
+					IsActive = false;
+				}
 				return;
 			}
 			//生成データを設定する
@@ -101,6 +110,13 @@ public class EnemySpawnManager : MonoBehaviour
 			//初期化
 			m_EnemySpawners.ForEach((spawner) => spawner.Initialize());
 		}
+	}
+
+	private IEnumerator SpawnBossEnemy()
+	{
+		yield return new WaitForSeconds(10.0f);
+		m_IsBossSpawn = true;
+		yield break;
 	}
 }
 

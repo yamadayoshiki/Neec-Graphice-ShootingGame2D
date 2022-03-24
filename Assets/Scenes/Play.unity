@@ -1489,10 +1489,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2468756700502837672, guid: 9aae1a7456e3a6d46821cd7c46097264, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2468756700841863680, guid: 9aae1a7456e3a6d46821cd7c46097264, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1577,49 +1573,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2468756700841863681, guid: 9aae1a7456e3a6d46821cd7c46097264, type: 3}
-      propertyPath: m_InitColor.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2468756700841863682, guid: 9aae1a7456e3a6d46821cd7c46097264, type: 3}
-      propertyPath: m_ScaleFactor
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2468756700841863682, guid: 9aae1a7456e3a6d46821cd7c46097264, type: 3}
-      propertyPath: m_ReferenceResolution.x
-      value: 960
-      objectReference: {fileID: 0}
-    - target: {fileID: 2468756700841863682, guid: 9aae1a7456e3a6d46821cd7c46097264, type: 3}
-      propertyPath: m_ReferenceResolution.y
-      value: 540
-      objectReference: {fileID: 0}
-    - target: {fileID: 2468756700841863682, guid: 9aae1a7456e3a6d46821cd7c46097264, type: 3}
-      propertyPath: m_ReferencePixelsPerUnit
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2468756700841863683, guid: 9aae1a7456e3a6d46821cd7c46097264, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1557564786}
-    - target: {fileID: 2468756700841863683, guid: 9aae1a7456e3a6d46821cd7c46097264, type: 3}
-      propertyPath: m_RenderMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2468756700841863683, guid: 9aae1a7456e3a6d46821cd7c46097264, type: 3}
-      propertyPath: m_SortingOrder
-      value: 35
-      objectReference: {fileID: 0}
     - target: {fileID: 2468756700841863684, guid: 9aae1a7456e3a6d46821cd7c46097264, type: 3}
       propertyPath: m_Name
       value: FadeCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 2468756701819302476, guid: 9aae1a7456e3a6d46821cd7c46097264, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2468756701991476607, guid: 9aae1a7456e3a6d46821cd7c46097264, type: 3}
-      propertyPath: m_Color.a
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9aae1a7456e3a6d46821cd7c46097264, type: 3}
@@ -2221,6 +2181,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1551948435}
   - component: {fileID: 1551948436}
+  - component: {fileID: 1551948437}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2260,6 +2221,20 @@ MonoBehaviour:
   m_ClaerImageCtr: {fileID: 1055626248}
   m_OverImageCtr: {fileID: 1472471493}
   m_SceneTransitionTime: 8
+--- !u!114 &1551948437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1551948434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c76a070eee6534348bb07e70fc0d2e86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsPause: 0
+  m_IsMute: 0
 --- !u!20 &1557564786 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 9187243644484739267, guid: 4e6408f17d001a84b88925e570322af0, type: 3}
@@ -2950,7 +2925,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7209585757940056725, guid: 07f59bcb62e672347be540e21d5460e5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: -320
       objectReference: {fileID: 0}
     - target: {fileID: 7209585757940056725, guid: 07f59bcb62e672347be540e21d5460e5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2987,6 +2962,10 @@ PrefabInstance:
     - target: {fileID: 7209585757940056725, guid: 07f59bcb62e672347be540e21d5460e5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7209585757940056727, guid: 07f59bcb62e672347be540e21d5460e5, type: 3}
+      propertyPath: m_MoveSpeed
+      value: 300
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07f59bcb62e672347be540e21d5460e5, type: 3}

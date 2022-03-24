@@ -113,8 +113,8 @@ public class Bullet : MonoBehaviour
 		if (collision.gameObject.TryGetComponent(out Life life))
 		{
 			life.ApplayDamage(DamageValue);
+			//自分を削除
+			Destroy(gameObject);
 		}
-		//自分を削除
-		Destroy(gameObject);
 	}
 }

@@ -22,11 +22,11 @@ public class FadeController : MonoBehaviour
 	[SerializeField]
 	private Image m_FadeImage = null;
 
-	/// <summary>
-	/// 切り抜き画像のトランスフォーム
-	/// </summary>
-	[SerializeField]
-	private RectTransform m_UnMaskTransform = null;
+	///// <summary>
+	///// 切り抜き画像のトランスフォーム
+	///// </summary>
+	//[SerializeField]
+	//private RectTransform m_UnMaskTransform = null;
 
 	/// <summary>
 	/// 初期化する色
@@ -66,7 +66,7 @@ public class FadeController : MonoBehaviour
 	public void Initilaize()
 	{
 		m_FadeImage.color = m_InitColor;
-		m_UnMaskTransform.localScale = Vector3.zero;
+		//m_UnMaskTransform.localScale = Vector3.zero;
 	}
 
 	/// <summary>
@@ -118,56 +118,56 @@ public class FadeController : MonoBehaviour
 		SetFadeTweeen(tween);
 	}
 
-	/// <summary>
-	/// マスクを使ったフェードイン処理(遅延処理あり)
-	/// </summary>
-	/// <param name="duration"> フェードする時間 </param>
-	/// <param name="compCallback"> フェード完了時に呼ぶ関数 </param>
-	/// <param name="delayTime"> 遅延時間 </param>
-	/// <param name="ease"> イージング </param>
-	public void FadeInMask(float duration, UnityAction compCallback = null, float delayTime = 0.0f, Ease ease = Ease.InQuint)
-	{
-		FadeMask(m_MaskFadeEndValue, duration, delayTime, ease, compCallback);
-	}
+	///// <summary>
+	///// マスクを使ったフェードイン処理(遅延処理あり)
+	///// </summary>
+	///// <param name="duration"> フェードする時間 </param>
+	///// <param name="compCallback"> フェード完了時に呼ぶ関数 </param>
+	///// <param name="delayTime"> 遅延時間 </param>
+	///// <param name="ease"> イージング </param>
+	//public void FadeInMask(float duration, UnityAction compCallback = null, float delayTime = 0.0f, Ease ease = Ease.InQuint)
+	//{
+	//	FadeMask(m_MaskFadeEndValue, duration, delayTime, ease, compCallback);
+	//}
 
-	/// <summary>
-	/// マスクを使ったフェードアウト処理
-	/// </summary>
-	/// <param name="duration"> フェードする時間 </param>
-	/// <param name="compCallback"> フェード完了時に呼ぶ関数 </param>
-	/// <param name="delayTime"> 遅延時間 </param>
-	/// <param name="ease"> イージング </param>
-	public void FadeOutMask(float duration, UnityAction compCallback = null, float delayTime = 0.0f, Ease ease = Ease.OutQuint)
-	{
-		FadeMask(0, duration, delayTime, ease, compCallback);
-	}
+	///// <summary>
+	///// マスクを使ったフェードアウト処理
+	///// </summary>
+	///// <param name="duration"> フェードする時間 </param>
+	///// <param name="compCallback"> フェード完了時に呼ぶ関数 </param>
+	///// <param name="delayTime"> 遅延時間 </param>
+	///// <param name="ease"> イージング </param>
+	//public void FadeOutMask(float duration, UnityAction compCallback = null, float delayTime = 0.0f, Ease ease = Ease.OutQuint)
+	//{
+	//	FadeMask(0, duration, delayTime, ease, compCallback);
+	//}
 
-	/// <summary>
-	/// マスクを使ったフェード処理
-	/// </summary>
-	/// <param name="endVlue"> フェードするゴールの値 </param>
-	/// <param name="duration"> フェードする時間 </param>
-	/// <param name="delayTime"> 遅延時間 </param>
-	/// <param name="ease"> イージング </param>
-	/// <param name="compCallback"> フェード完了時に呼ぶ関数 </param>
-	public void FadeMask(float endVlue, float duration, float delayTime, Ease ease = Ease.InQuint, UnityAction compCallback = null)
-	{
-		var value = Vector3.one * endVlue;
-		var tween = m_UnMaskTransform.DOScale(value, duration)
-			.SetDelay(delayTime)
-			.SetEase(ease)
-			.OnComplete(() =>
-			{
-				//再生完了コールバックを実行
-				if (compCallback != null)
-				{
-					compCallback();
-				}
-			}
-		);
+	///// <summary>
+	///// マスクを使ったフェード処理
+	///// </summary>
+	///// <param name="endVlue"> フェードするゴールの値 </param>
+	///// <param name="duration"> フェードする時間 </param>
+	///// <param name="delayTime"> 遅延時間 </param>
+	///// <param name="ease"> イージング </param>
+	///// <param name="compCallback"> フェード完了時に呼ぶ関数 </param>
+	//public void FadeMask(float endVlue, float duration, float delayTime, Ease ease = Ease.InQuint, UnityAction compCallback = null)
+	//{
+	//	var value = Vector3.one * endVlue;
+	//	var tween = m_UnMaskTransform.DOScale(value, duration)
+	//		.SetDelay(delayTime)
+	//		.SetEase(ease)
+	//		.OnComplete(() =>
+	//		{
+	//			//再生完了コールバックを実行
+	//			if (compCallback != null)
+	//			{
+	//				compCallback();
+	//			}
+	//		}
+	//	);
 
-		SetFadeTweeen(tween);
-	}
+	//	SetFadeTweeen(tween);
+	//}
 
 	/// <summary>
 	/// 一時停止
